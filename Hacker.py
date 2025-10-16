@@ -35,11 +35,29 @@ class Hacker:
                 return
         print('You need a \'Data Spike\' to launch an attack.')
 
-    def encrypt_asset(self, item):
+    def encrypt_decrypt_asset(self, item):
         for asset in self.inventory:
             if asset.name == 'Security Chip':
-                item.encrypted = True
-                print(f'{item.name} has been encrypted.')
+                if item.encrypted:
+                    item.encrypted = False
+                    print(f'{item.name} has been decrypted.')
+                elif item.decrypted = False:
+                    item.encrypted = True
+                    print(f'{item.name} has been encrypted.')
+                return
+
+    def upgrade_rig(self):
+        for asset in self.inventory:
+            if asset.name == 'Hardware Patch' and self.rig:
+                rig.upgrade_level += 1
+                self.inventory.remove(asset)
+                print(f'{self.name} upgraded their rig.')
+                return
+            print('You need a \'Hardware Patch\' to upgrade your rig.')
+
+    def store_assets(self, asset_name = None):
+
+
 
 
 
