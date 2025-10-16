@@ -9,11 +9,21 @@ This is my own work as defined by the University's Academic Misconduct Policy.
 """
 
 class Hacker:
+    TRACE_THRESHOLD = 5 # constant for trace level checks
+
     def __init__(self, name):
         self.name = name
         self.inventory = ['CryptoToken']
         self.rig = False
         self.trace_level = 0
+
+    def exposed(self):
+        return self.trace_level > self.TRACE_THRESHOLD # returns true if trace level exceeds threshold -> hacker is exposed
+
+    def reduce_trace(self):
+        self.trace_level = max(0, self.trace_level - 1)
+        print(f'Trace level reduced \n'
+              f'New trace level: {self.trace_level}\n')
 
     def get_rig(self):
         for asset in self.inventory:
@@ -25,11 +35,15 @@ class Hacker:
         print('You are broke buddy, no sweet sweet rig for you.')   # Change this to be professional :)
 
     def attack(self, target):
+        if self.exposed():
+            print('You are exposed. Reduce trace level to attack')
+            return
         for asset in self.rig.storage:
             if asset.name == 'Data Spike':
                 target.damage_counter += 1
                 if target.broken_state:
                     print('insert asset extraction method here')     # METHOD NOT IMPLEMENTED
+                    reduce_trace()                                   # Potentially unwise to have that here, locked behind attacking - which is blocked if exposed
                 self.rig.storage.remove(asset)
                 print(f'{self.name} launched a data spike at {target.name}')
                 return
@@ -99,6 +113,11 @@ class Hacker:
             print(f'You do not own {asset_name}')
             return None # see above comment?
 
+    def __str__(self):
+        return (f'Hacker: {self.name}\n'
+                f'Rig Name: {self.rig.name}\n'
+                f'Trace Level: {self.trace_level}\n'
+                f'Inventory: {self.inventory}\n')
 
 
 
