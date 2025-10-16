@@ -29,7 +29,7 @@ class Hacker:
             if asset.name == 'Data Spike':
                 target.damage_counter += 1
                 if target.broken_state:
-                    print('insert asset extraction method here')
+                    print('insert asset extraction method here')     # METHOD NOT IMPLEMENTED
                 self.rig.storage.remove(asset)
                 print(f'{self.name} launched a data spike at {target.name}')
                 return
@@ -41,7 +41,7 @@ class Hacker:
                 if item.encrypted:
                     item.encrypted = False
                     print(f'{item.name} has been decrypted.')
-                elif item.decrypted = False:
+                elif not item.encrypted:
                     item.encrypted = True
                     print(f'{item.name} has been encrypted.')
                 return
@@ -55,7 +55,55 @@ class Hacker:
                 return
             print('You need a \'Hardware Patch\' to upgrade your rig.')
 
-    def store_assets(self, asset_name = None):
+    def store_asset(self, asset_name = None):
+        if not self.rig:                                            # Validation
+            print('You need a rig to store things in first choom')
+            return
+        if asset_name:
+            for asset in self.inventory:
+                if asset == asset_name:
+                    self.rig.storage.append(asset) #Clone item to Rig class storage list
+                    self.inventory.remove(asset)
+                    print(f'{asset_name} is now stored in the rig.')
+                    return
+            print(f'You actually need to own a {asset_name} to store it bucko.') # make appropriate
+        else:
+            for asset in self.inventory:          # For loop iterates over inventory and adds copy to rig storage, then removes from inventory
+                self.rig.storage.append(asset)
+                self.inventory.remove(asset)
+            print('All assets are now in rig storage.')
+
+    def retrieve_asset(self, asset_name = None):
+        if not self.rig:
+            print('You need a rig to retrieve things in first choom')
+            return
+        if asset_name:
+            for asset in self.inventory:
+                if asset == asset_name:
+                    self.inventory.append(asset)
+                    self.rig.storage.remove(asset)
+                    print(f'{asset_name} has been retrieved from the rig.')
+            print(f'You actually need to own a {asset_name} to retrieve it bucko.')
+        else:
+            for asset in self.rig.storage:
+                self.inventory.append(asset)
+                self.rig.storage.remove(asset)
+            print('All assets are now in inventory.')
+
+    def scan_inventory(self, asset_name):
+        for asset in self.inventory:
+            if asset == asset_name:
+                self.inventory.remove(asset)
+                print(f'{asset_name} removed from inventory, don\'t know why you did that things aren\'t free :)')
+                return asset # Instructions unclear, is this what was meant by 'return and remove'?
+            print(f'You do not own {asset_name}')
+            return None # see above comment?
+
+
+
+
+
+
 
 
 
