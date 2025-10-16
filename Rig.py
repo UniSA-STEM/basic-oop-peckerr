@@ -30,14 +30,20 @@ class Rig:
 
     def take_damage(self):
         self.damage_counter += 1
-        if self.upgrade_level = 0 and self.damage_counter >= 2:
+        if self.upgrade_level == 0 and self.damage_counter >= 2:
             self.broken_state = True
             print(f'{self.name} has been broken.')
 
     def condition(self):
         if self.broken_state:
-            print(f'{self.name} condition is: Broken (Level 0)')
+            return f'{self.name} condition is: Broken (Level 0)'
         else:
-            print(f'{self.name} condition is: Pristine (Level {self.upgrade_level})')
+            return f'{self.name} condition is: Pristine (Level {self.upgrade_level})'
 
-
+    def __str__(self):
+        return (f'----------\n'
+                f'Rig Name: {self.name}\n'
+                f'Condition: {self.condition()}\n'
+                f'Upgrade Level: {self.upgrade_level}\n'
+                f'Assets: {self.storage}\n'
+                f'---------')
