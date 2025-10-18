@@ -25,7 +25,7 @@ class Hacker:
         return self.trace_level > self.TRACE_THRESHOLD # returns true if trace level exceeds threshold -> hacker is exposed
 
     def reduce_trace(self):
-        self.trace_level = max(0, self.trace_level - 1)
+        self.trace_level = max(0, (self.trace_level - 1))
         print(f'Trace level reduced \n'
               f'New trace level: {self.trace_level}\n')
 
@@ -47,11 +47,14 @@ class Hacker:
             return
         for asset in self.rig.storage:
             if asset.name == 'Data Spike':
+                print(f'Damage counter is now: {target.rig.damage_counter}')
                 target.rig.damage_counter += 1
+                print(f'Damage counter is now: {target.rig.damage_counter}')
+                target.rig.broken()
                 self.trace_level += 1
                 if target.rig.broken_state:
                     print('insert asset extraction method here')     # METHOD NOT IMPLEMENTED
-                    reduce_trace()                                   # Potentially unwise to have that here, locked behind attacking - which is blocked if exposed
+                    self.reduce_trace()                                   # Potentially unwise to have that here, locked behind attacking - which is blocked if exposed
                 self.rig.storage.remove(asset)
                 print(f'\n{self.name} launched a data spike at {target.name}\'s rig {target.rig.name}.')
                 print(f'Trace level increased to {self.trace_level}\n')

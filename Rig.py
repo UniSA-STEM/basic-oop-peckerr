@@ -35,15 +35,14 @@ class Rig:
         self.upgrade_level += 1
         print(f'{self.name} has been upgraded to {self.upgrade_level}.')
 
-    def take_damage(self):
-        self.damage_counter += 1
-        if self.upgrade_level == 0 and self.damage_counter >= 2:
+    def broken(self):
+        if self.damage_counter >= 2:
             self.broken_state = True
             print(f'{self.name} has been broken.')
 
     def condition(self):
         if self.broken_state:
-            return f'{self.name} condition is: Broken (Level 0)'
+            return f'{self.name} condition is: Broken (Level {self.upgrade_level})'
         else:
             return f'{self.name} condition is: Pristine (Level {self.upgrade_level})'
 
