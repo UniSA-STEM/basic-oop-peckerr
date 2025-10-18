@@ -8,8 +8,15 @@ This is my own work as defined by the University's Academic Misconduct Policy.
 """
 
 # Import classes
-from Asset import Asset
-from Rig import Rig
 from Hacker import Hacker
 
 def main():
+    hacker = Hacker('MrCoolGuy')
+    hacker.get_rig()
+    print(hacker)
+    hacker.store_asset('CryptoToken')
+    hacker.attack(hacker.rig)
+    hacker.extract_asset(hacker.rig)
+
+
+main()

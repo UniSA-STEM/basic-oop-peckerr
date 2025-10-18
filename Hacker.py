@@ -8,6 +8,10 @@ Username: COCTY007
 This is my own work as defined by the University's Academic Misconduct Policy.
 """
 
+# Import needed classes
+from Asset import Asset
+from Rig import Rig
+
 class Hacker:
     TRACE_THRESHOLD = 5 # constant for trace level checks
 
@@ -27,7 +31,7 @@ class Hacker:
 
     def get_rig(self):
         for asset in self.inventory:
-            if assets.name == 'CryptoToken':
+            if asset.name == 'CryptoToken':
                 self.rig = Rig('BigDawg v2')              # placeholder name, maybe let user choose via input
                 self.inventory.remove(asset)
                 print(f'{self.name} activated rig: {self.rig.name}.')

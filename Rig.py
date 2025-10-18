@@ -7,8 +7,9 @@ ID: 110466784
 Username: COCTY007
 This is my own work as defined by the University's Academic Misconduct Policy.
 """
-from Asset import Asset
 
+# Import needed classes
+from Asset import Asset
 
 class Rig:
     def __init__(self, name):
