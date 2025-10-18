@@ -17,7 +17,7 @@ class Hacker:
 
     def __init__(self, name):
         self.name = name
-        self.inventory = [Asset('CryptoToken', 'Used to acquire or repair rigs.')]
+        self.inventory = [Asset('CryptoToken', '- Used to acquire or repair rigs.')]
         self.rig = None
         self.trace_level = 0
 
@@ -132,10 +132,12 @@ class Hacker:
             return None # see above comment?
 
     def __str__(self):
+        rig_name = self.rig.name if self.rig else 'No rig.'
+        if self.inventory:
+            hacker_inv = '\n'.join(str(asset) for asset in self.inventory) #Had to google this one, converts each inv obj into str, iterates on each asset
+        else:
+            hacker_inv = 'No assets.'
         return (f'Hacker: {self.name}\n'
-                f'Rig Name: {self.rig.name}\n'
+                f'Rig Name: {rig_name}\n'
                 f'Trace Level: {self.trace_level}\n'
-                f'Inventory: {self.inventory}\n')
-
-
-
+                f'Inventory: {hacker_inv}\n')

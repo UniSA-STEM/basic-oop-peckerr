@@ -11,12 +11,9 @@ This is my own work as defined by the University's Academic Misconduct Policy.
 from Hacker import Hacker
 
 def main():
-    hacker = Hacker('MrCoolGuy')
-    hacker.get_rig()
+    hacker = Hacker(input('Enter your elite hacker name: '))
     print(hacker)
-    hacker.store_asset('CryptoToken')
-    hacker.attack(hacker.rig)
-    hacker.extract_asset(hacker.rig)
+
 
 
 main()
