@@ -29,12 +29,15 @@ class Hacker:
         print(f'Trace level reduced \n'
               f'New trace level: {self.trace_level}\n')
 
-    def get_rig(self):
+    def get_rig(self, rig_name=None):
         for asset in self.inventory:
             if asset.name == 'CryptoToken':
-                self.rig = Rig('BigDawg v2')              # placeholder name, maybe let user choose via input
+                if rig_name is not None:
+                    self.rig = Rig(rig_name)
+                else:
+                    self.rig = Rig(input('Name your rig: '))
+                    print(f'{self.name} activated rig: {self.rig.name}.')
                 self.inventory.remove(asset)
-                print(f'{self.name} activated rig: {self.rig.name}.')
                 return
         print('You are broke buddy, no sweet sweet rig for you.')   # Change this to be professional :)
 
@@ -44,13 +47,14 @@ class Hacker:
             return
         for asset in self.rig.storage:
             if asset.name == 'Data Spike':
-                target.damage_counter += 1
+                target.rig.damage_counter += 1
                 self.trace_level += 1
-                if target.broken_state:
+                if target.rig.broken_state:
                     print('insert asset extraction method here')     # METHOD NOT IMPLEMENTED
                     reduce_trace()                                   # Potentially unwise to have that here, locked behind attacking - which is blocked if exposed
                 self.rig.storage.remove(asset)
-                print(f'{self.name} launched a data spike at {target.name}')
+                print(f'\n{self.name} launched a data spike at {target.name}\'s rig {target.rig.name}.')
+                print(f'Trace level increased to {self.trace_level}\n')
                 return
         print('You need a \'Data Spike\' to launch an attack.')
 

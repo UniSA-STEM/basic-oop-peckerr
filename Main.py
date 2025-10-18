@@ -11,9 +11,17 @@ This is my own work as defined by the University's Academic Misconduct Policy.
 from Hacker import Hacker
 
 def main():
-    hacker = Hacker(input('Enter your elite hacker name: '))
-    print(hacker)
+    #hacker = Hacker(input('Enter your elite hacker name: '))
+    attacker = Hacker('Phil')
+    defender = Hacker('Bad Phil')
+    print(attacker)
 
+    attacker.get_rig()
+    defender.get_rig(rig_name = 'Bad Phil\'s Bad Rig')
+
+    attacker.attack(defender)
+    attacker.attack(defender)
+    attacker.attack(defender)
 
 
 main()
