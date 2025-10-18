@@ -13,8 +13,8 @@ class Hacker:
 
     def __init__(self, name):
         self.name = name
-        self.inventory = ['CryptoToken']
-        self.rig = False
+        self.inventory = [Asset('CryptoToken', 'Used to acquire or repair rigs.')]
+        self.rig = None
         self.trace_level = 0
 
     def exposed(self):
@@ -28,9 +28,9 @@ class Hacker:
     def get_rig(self):
         for asset in self.inventory:
             if assets.name == 'CryptoToken':
-                self.rig = True
+                self.rig = Rig('BigDawg v2')              # placeholder name, maybe let user choose via input
                 self.inventory.remove(asset)
-                print(f'{self.name} activated a rig.')
+                print(f'{self.name} activated rig: {self.rig.name}.')
                 return
         print('You are broke buddy, no sweet sweet rig for you.')   # Change this to be professional :)
 
@@ -118,19 +118,6 @@ class Hacker:
                 f'Rig Name: {self.rig.name}\n'
                 f'Trace Level: {self.trace_level}\n'
                 f'Inventory: {self.inventory}\n')
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

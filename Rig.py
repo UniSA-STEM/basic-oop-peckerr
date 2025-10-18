@@ -7,14 +7,20 @@ ID: 110466784
 Username: COCTY007
 This is my own work as defined by the University's Academic Misconduct Policy.
 """
+from Asset import Asset
+
 
 class Rig:
     def __init__(self, name):
         self.name = name
         self.damage_counter = 0
         self.broken_state = False
-        self.storage = []
         self.upgrade_level = 0
+        self.storage = [
+            Asset('Data Spike', 'Used in battles'),
+            Asset('Data Spike', 'Used in battles'),
+            Asset('Removable Drive', 'Found in rigs and used for extraction')
+        ]
 
     def repair(self, crypto_token):
         if self.damage_counter > 0:
