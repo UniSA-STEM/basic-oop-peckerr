@@ -82,9 +82,8 @@ class Hacker:
                     return
             print(f'You actually need to own a {asset_name} to store it bucko.') # make appropriate
         else:
-            for asset in self.inventory:          # For loop iterates over inventory and adds copy to rig storage, then removes from inventory
-                self.rig.storage.append(asset)
-                self.inventory.remove(asset)
+            self.rig.storage.extend(self.inventory)
+            self.inventory.clear()
             print('All assets are now in rig storage.')
 
     def retrieve_asset(self, asset_name = None):
