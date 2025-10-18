@@ -47,9 +47,13 @@ class Rig:
             return f'{self.name} condition is: Pristine (Level {self.upgrade_level})'
 
     def __str__(self):
+        if self.storage:
+            rig_inv = '\n'.join(str(asset) for asset in self.storage)
+        else:
+            rig_inv = 'No assets.'
         return (f'----------\n'
                 f'Rig Name: {self.name}\n'
                 f'Condition: {self.condition()}\n'
                 f'Upgrade Level: {self.upgrade_level}\n'
-                f'Assets: {self.storage}\n'
+                f'Assets: {rig_inv}\n'
                 f'---------')

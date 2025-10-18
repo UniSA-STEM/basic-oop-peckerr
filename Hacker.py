@@ -17,7 +17,8 @@ class Hacker:
 
     def __init__(self, name):
         self.name = name
-        self.inventory = [Asset('CryptoToken', '- Used to acquire or repair rigs.')]
+        self.inventory = [Asset('CryptoToken', '- Used to acquire or repair rigs.'),
+                          Asset('Removable Drive', '- Found in rigs and used for extraction.')]
         self.rig = None
         self.trace_level = 0
 
@@ -108,15 +109,15 @@ class Hacker:
         else:
             self.rig.storage.extend(self.inventory)
             self.inventory.clear()
-            print('All assets are now in rig storage.')
+            print('\nAll assets are now in rig storage.')
 
     def retrieve_asset(self, asset_name = None):
         if not self.rig:
             print('You need a rig to retrieve things in first choom')
             return
         if asset_name:
-            for asset in self.inventory:
-                if asset == asset_name:
+            for asset in self.rig.storage:
+                if asset.name == asset_name:
                     self.inventory.append(asset)
                     self.rig.storage.remove(asset)
                     print(f'{asset_name} has been retrieved from the rig.')
@@ -125,7 +126,7 @@ class Hacker:
             for asset in self.rig.storage:
                 self.inventory.append(asset)
                 self.rig.storage.remove(asset)
-            print('All assets are now in inventory.')
+            print('\nAll assets are now in inventory.')
 
     def scan_inventory(self, asset_name):
         for asset in self.inventory:
@@ -142,7 +143,7 @@ class Hacker:
             hacker_inv = '\n'.join(str(asset) for asset in self.inventory) #Had to google this one, converts each inv obj into str, iterates on each asset
         else:
             hacker_inv = 'No assets.'
-        return (f'Hacker: {self.name}\n'
+        return (f'\nHacker: {self.name}\n'
                 f'Rig Name: {rig_name}\n'
                 f'Trace Level: {self.trace_level}\n'
                 f'Inventory: {hacker_inv}\n')

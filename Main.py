@@ -28,11 +28,14 @@ def main():
 
     attacker.attack(defender)
     attacker.attack(defender)
-    #attacker.attack(defender)
+    attacker.attack(defender)
 
+    print(attacker)
+    attacker.store_asset()
+    print(attacker.rig)
+    print(attacker)
 
-
-
-
+    attacker.retrieve_asset('Removable Drive')
+    print(attacker)
 
 main()

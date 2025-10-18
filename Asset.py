@@ -29,6 +29,6 @@ class Asset:
 #ASSET LIST
 # CryptoToken: Used to acquire or repair rigs. (H)
 # Data Spike: Used in battles. (R)
-# Removable Drive: Found in rigs and used for extrac�on. (R)
+# Removable Drive: Found in rigs and used for extraction. (R)
 # Security Chip: Used to encrypt or decrypt assets. (H or R)
 # Hardware Patch: Used to upgrade rigs. (H)
