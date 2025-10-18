@@ -27,7 +27,7 @@ def main():
     defender.get_rig(rig_name = 'Bad Phil\'s Bad Rig')
 
     attacker.attack(defender)
-    #attacker.attack(defender)
+    attacker.attack(defender)
     #attacker.attack(defender)
 
 
