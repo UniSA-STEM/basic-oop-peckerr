@@ -41,6 +41,7 @@ class Hacker:
         for asset in self.rig.storage:
             if asset.name == 'Data Spike':
                 target.damage_counter += 1
+                self.trace_level += 1
                 if target.broken_state:
                     print('insert asset extraction method here')     # METHOD NOT IMPLEMENTED
                     reduce_trace()                                   # Potentially unwise to have that here, locked behind attacking - which is blocked if exposed
@@ -48,6 +49,20 @@ class Hacker:
                 print(f'{self.name} launched a data spike at {target.name}')
                 return
         print('You need a \'Data Spike\' to launch an attack.')
+
+    def extract_asset(self, target):
+        assets_extracted = 0
+        for asset in self.inventory:
+            if asset.name == 'Removable Drive' and target.broken_state:
+                for items in target.rig.storage:
+                    if not items.encrypted:
+                        self.inventory.append(items)
+                        target.storage.remove(items)
+                        assets_extracted += 1
+                print(f'Extracted {assets_extracted} asset/s.')
+                assets_extracted = 0
+        print('Extraction failed')
+
 
     def encrypt_decrypt_asset(self, item):
         for asset in self.inventory:
