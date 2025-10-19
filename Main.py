@@ -19,6 +19,7 @@ from Hacker import Hacker
 from Rig import Rig
 from Asset import Asset
 
+
 # def main():
 #     #hacker = Hacker(input('Enter your elite hacker name: '))
 #     attacker = Hacker('Phil')
@@ -103,8 +104,15 @@ def test4():
     attacker = Hacker('Hacker')
     attacker.get_rig(rig_name= 'Hack222')
 
-    attacker.inventory.append(Asset('Security Chip', '- Used to encrypt or decrypt assets.'))
+    attacker.inventory.append(Asset.security_chip) #add items to inv for testing
     attacker.inventory.append(Asset.data_spike)
 
-    print(attacker)
+    print(attacker) # check in inventory
+
+    attacker.encrypt_decrypt_asset('Data Spike') #(Encrypt the data spike asset that is now in attacker inventory)
+
+    print(attacker) # Double check
+
+    attacker.store_asset('Data Spike') #Attempt to store newly encrypted asset (SHOULD FAIL AND RETURN A MESSAGE)
+
 test4()

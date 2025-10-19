@@ -82,14 +82,24 @@ class Hacker:
         print(f'Extracted {assets_extracted} asset/s.')
         self.inventory.remove(removable_drive)          # Consumes removable drive asset if successful
 
-    def encrypt_decrypt_asset(self, item):
-        security_chip = None
+    def encrypt_decrypt_asset(self, asset_name):
+        item = None                 # Finds asset in inv by name, used for better readability in main.py
+        for asset in self.inventory:
+            if asset.name == asset_name:
+                item = asset
+                break
+
+        security_chip = None        # Validation
         for asset in self.inventory:
             if asset.name == 'Security Chip':
                 security_chip = asset
                 break
 
-        if security_chip:
+        if not security_chip:       # Check if sec chip
+            print('You need a Security Chip to encrypt or decrypt assets.')
+            return
+
+        if security_chip:           # Main function, de/encrypt asset
             if item.encrypted:
                 item.decrypt()
                 print(f'{item.name} decrypted.')
@@ -97,8 +107,6 @@ class Hacker:
                 item.encrypt()
                 print(f'{item.name} encrypted.')
             self.inventory.remove(security_chip)
-        else:
-            print('You need a Security Chip to encrypt or decrypt assets.')
 
     def upgrade_rig(self):
         if not self.rig:
