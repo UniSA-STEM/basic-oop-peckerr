@@ -51,11 +51,11 @@ class Rig:
 
     def generate_asset(self):
         asset_list = [
-            ('Data Spike', 'Used in battles'),
-            ('Crypto Token', 'Used to acquire or repair rigs.'),
-            ('Removable Drive', 'Found in rigs and used for extraction'),
-            ('Security Chip', 'Used to encrypt of decrypt assets.'),
-            ('Hardware Patch', 'Used to upgrade rigs')
+            ('Data Spike', '- Used in battles.'),
+            ('Crypto Token', '-  to acquire or repair rigs.'),
+            ('Removable Drive', '- Found in rigs and used for extraction.'),
+            ('Security Chip', '- Used to encrypt of decrypt assets.'),
+            ('Hardware Patch', '- Used to upgrade rigs.')
         ]
 
         choice = random.choice(asset_list)

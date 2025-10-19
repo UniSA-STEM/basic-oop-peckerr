@@ -54,11 +54,24 @@ class Hacker:
                     target.rig.broken()
                     if target.rig.broken_state:
                         self.reduce_trace()                                   # Potentially unwise to have that here, locked behind attacking - which is blocked if exposed
+                        extract_check = input('Do you want to extract assets? (y/n) ')
+                        if extract_check == 'y' or extract_check == 'Y':
+                            self.extract_asset(target.rig)
                     self.rig.storage.remove(asset)
                     return
         print('You need a \'Data Spike\' to launch an attack.')
 
     def extract_asset(self, target):
+        removable_drive = None
+        for asset in self.inventory:                            # Checks if hacker has removable drive in inv, if so attributes it to obj
+            if asset.name == 'Removable Drive':
+                removable_drive = asset
+                break
+
+        if not removable_drive:
+            print('You need a Removable Drive to extract assets.')
+            return
+
         assets_extracted = 0
         for asset in target.storage:
             if not asset.encrypted:
@@ -66,8 +79,7 @@ class Hacker:
                 target.storage.remove(asset)
                 assets_extracted += 1
         print(f'Extracted {assets_extracted} asset/s.')
-
-
+        self.inventory.remove(removable_drive)          # Consumes removable drive asset if successful
 
     def encrypt_decrypt_asset(self, item):
         for asset in self.inventory:

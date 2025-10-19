@@ -52,10 +52,11 @@ def extract_test():
     defender.get_rig(rig_name='Bad Phil\'s Bad Rig')
 
     attacker.attack(defender)
+    print(attacker)
     attacker.attack(defender)
 
-    print(attacker)
-    attacker.extract_asset(defender.rig)
+
+    #attacker.extract_asset(defender.rig)
     print(attacker)
 
 
