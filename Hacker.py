@@ -60,12 +60,12 @@ class Hacker:
                     print(f'{self.name}\'s trace level increased to {self.trace_level}\n')
                     target.rig.damage_counter += 1 + self.rig.upgrade_level
                     target.rig.broken()
+                    self.rig.storage.remove(asset)
                     if target.rig.broken_state:
-                        self.reduce_trace()                                   # Potentially unwise to have that here, locked behind attacking - which is blocked if exposed
+                        self.reduce_trace()
                         extract_check = input('Do you want to extract assets? (y/n) ')
                         if extract_check == 'y' or extract_check == 'Y':
                             self.extract_asset(target.rig)
-                    self.rig.storage.remove(asset)
                     return
         elif target.rig.broken_state:
             print('The target is already broken.')
@@ -147,6 +147,7 @@ class Hacker:
         if asset_name: # Single item transfers
             if not self.rig.storage_lvl(1):  # Checks storage capacity for single transfer
                 print(f'Storage is full. ({len(self.rig.storage)}/{self.rig.storage_cap})')
+                return
 
             for asset in self.inventory:
                 if asset.name == asset_name:

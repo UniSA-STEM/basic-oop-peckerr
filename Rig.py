@@ -22,8 +22,7 @@ class Rig:
         self.storage = [
             Asset('Data Spike', '- Used in battles'),
             Asset('Data Spike', '- Used in battles'),
-            Asset('Removable Drive', '- Found in rigs and used for extraction')
-        ]
+            Asset('Removable Drive', '- Found in rigs and used for extraction')]
 
     def repair(self, hacker):
         for asset in hacker.inventory:
@@ -59,7 +58,7 @@ class Rig:
         else:
             return f'Pristine (Level {self.upgrade_level})'
 
-    def generate_asset(self):
+    def generate_asset(self, hacker):
         asset_list = [
             ('Data Spike', '- Used in battles.'),
             ('CryptoToken', '-  to acquire or repair rigs.'),
@@ -71,13 +70,14 @@ class Rig:
         choice = random.choice(asset_list)
         generated_asset = Asset(choice[0], choice[1])
         self.storage.append(generated_asset)
-        print('\nGenerating asset... 0%'
-              '\nGenerating asset... 13%'
-              '\nGenerating asset... 21%'
-              '\nGenerating asset... 40%'       # Fake waiting - maybe add rng clock later.
-              '\nGenerating asset... 78%'
-              '\nGenerating asset... 100%')
+        print('\nGenerating asset... 0%')
+        print('Generating asset... 13%')
+        print('Generating asset... 21%')
+        print('Generating asset... 40%')
+        print('Generating asset... 78%')
+        print('Generating asset... 100%')
         print(f'\n{generated_asset.name} has been generated.')
+        hacker.reduce_trace()
         return generated_asset
 
     def __str__(self):
