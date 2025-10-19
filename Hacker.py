@@ -102,10 +102,10 @@ class Hacker:
         if security_chip:           # Main function, de/encrypt asset
             if item.encrypted:
                 item.decrypt()
-                print(f'{item.name} decrypted.')
+                print(f'\n{item.name} decrypted.')
             else:
                 item.encrypt()
-                print(f'{item.name} encrypted.')
+                print(f'\n{item.name} encrypted.')
             self.inventory.remove(security_chip)
 
     def upgrade_rig(self):
@@ -127,14 +127,15 @@ class Hacker:
 
     def store_asset(self, asset_name = None):
         if not self.rig:                                            # Validation
-            print('You need a rig to store things in first choom')
+            print('You need a rig to be able to store assets.')
             return
 
         if asset_name: # Single item transfers
             for asset in self.inventory:
                 if asset.name == asset_name:
                     if asset.encrypted:
-                        print(f'{asset.name} needs to be decrypted before transfer.')
+                        print(f'\n{asset.name} needs to be decrypted before transfer.')
+                        return
                     self.rig.storage.append(asset) #Clone item to Rig class storage list
                     self.inventory.remove(asset)
                     print(f'{asset_name} is now stored in the rig.')

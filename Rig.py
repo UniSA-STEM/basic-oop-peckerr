@@ -79,5 +79,5 @@ class Rig:
                 f'Rig Name: {self.name}\n'
                 f'Condition: {self.condition()}\n'
                 f'Upgrade Level: {self.upgrade_level}\n'
-                f'Assets: {rig_inv}\n'
+                f'Storage: {rig_inv}\n'
                 f'---------------------------')

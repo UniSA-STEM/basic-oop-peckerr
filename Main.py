@@ -100,19 +100,22 @@ from Asset import Asset
 # test3()
 
 #TEST 4: Encryption and storage testing
-def test4():
-    attacker = Hacker('Hacker')
-    attacker.get_rig(rig_name= 'Hack222')
-
-    attacker.inventory.append(Asset.security_chip) #add items to inv for testing
-    attacker.inventory.append(Asset.data_spike)
-
-    print(attacker) # check in inventory
-
-    attacker.encrypt_decrypt_asset('Data Spike') #(Encrypt the data spike asset that is now in attacker inventory)
-
-    print(attacker) # Double check
-
-    attacker.store_asset('Data Spike') #Attempt to store newly encrypted asset (SHOULD FAIL AND RETURN A MESSAGE)
-
-test4()
+# def test4():
+#     attacker = Hacker('Hacker')
+#     attacker.get_rig(rig_name= 'Hack222')
+#
+#     attacker.inventory.append(Asset.security_chip) #add items to inv for testing
+#     attacker.inventory.append(Asset.data_spike)
+#
+#     print(attacker) # Hacker should have a rig, and two items.
+#
+#     attacker.encrypt_decrypt_asset('Data Spike') #(Encrypt the data spike asset that is now in attacker inventory)
+#
+#     print(attacker) # Hacker should have a rig, and only an encrypted data spike
+#     print(attacker.rig) # Rig should only have default items
+#
+#     attacker.store_asset('Data Spike') #Attempt to store newly encrypted asset (SHOULD FAIL AND RETURN A MESSAGE)
+#
+#     print(attacker) # Nothing should change for both rig/hacker
+#     print(attacker.rig)
+# test4()
