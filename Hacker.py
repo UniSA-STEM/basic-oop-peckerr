@@ -145,6 +145,9 @@ class Hacker:
             return
 
         if asset_name: # Single item transfers
+            if not self.rig.storage_lvl(1):  # Checks storage capacity for single transfer
+                print(f'Storage is full. ({len(self.rig.storage)}/{self.rig.storage_cap})')
+
             for asset in self.inventory:
                 if asset.name == asset_name:
                     if asset.encrypted:
@@ -160,6 +163,10 @@ class Hacker:
                 if asset.encrypted:
                     print(f'All items need to be decrypted before transfer.')
                     return
+
+            if not self.rif.storage_lvl(len(self.inventory)): # Checks for space if transferring all
+                print(f'Not enough room for everything. ({len(self.rig.storage)}/{self.rig.storage_cap})')
+                return
             self.rig.storage.extend(self.inventory)
             self.inventory.clear()
             print('\nAll assets are now in rig storage.')

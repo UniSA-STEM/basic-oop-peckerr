@@ -18,6 +18,7 @@ class Rig:
         self.damage_counter = 0
         self.broken_state = False
         self.upgrade_level = 0
+        self.storage_cap = 5
         self.storage = [
             Asset('Data Spike', '- Used in battles'),
             Asset('Data Spike', '- Used in battles'),
@@ -39,7 +40,11 @@ class Rig:
 
     def upgrade(self, hardware_patch):
         self.upgrade_level += 1
+        self.storage_cap += 2
         print(f'{self.name} has been upgraded to level: {self.upgrade_level}.')
+
+    def storage_lvl(self, asset_amount=1):
+        return len(self.storage) + asset_amount <= self.storage_cap
 
     def broken(self):
         max_hp = 2 + self.upgrade_level
