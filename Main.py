@@ -38,4 +38,10 @@ def main():
     attacker.retrieve_asset('Removable Drive')
     print(attacker)
 
+    print(attacker.rig)
+    attacker.rig.generate_asset()
+    print(attacker.rig)
+
+
+
 main()

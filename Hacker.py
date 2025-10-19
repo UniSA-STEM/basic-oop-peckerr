@@ -17,8 +17,7 @@ class Hacker:
 
     def __init__(self, name):
         self.name = name
-        self.inventory = [Asset('CryptoToken', '- Used to acquire or repair rigs.'),
-                          Asset('Removable Drive', '- Found in rigs and used for extraction.')]
+        self.inventory = [Asset('CryptoToken', '- Used to acquire or repair rigs.')]
         self.rig = None
         self.trace_level = 0
 

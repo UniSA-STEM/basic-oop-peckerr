@@ -10,6 +10,7 @@ This is my own work as defined by the University's Academic Misconduct Policy.
 
 # Import needed classes
 from Asset import Asset
+import random          # Needed to generate asset randomly (easily)
 
 class Rig:
     def __init__(self, name):
@@ -36,15 +37,38 @@ class Rig:
         print(f'{self.name} has been upgraded to {self.upgrade_level}.')
 
     def broken(self):
-        if self.damage_counter >= 2:
+        max_hp = 2 + self.upgrade_level
+        if self.damage_counter >= max_hp:
             self.broken_state = True
             print(f'{self.name} has been broken.')
+        return self.broken_state
 
     def condition(self):
         if self.broken_state:
-            return f'{self.name} condition is: Broken (Level {self.upgrade_level})'
+            return f'Broken (Level {self.upgrade_level})'
         else:
-            return f'{self.name} condition is: Pristine (Level {self.upgrade_level})'
+            return f'Pristine (Level {self.upgrade_level})'
+
+    def generate_asset(self):
+        asset_list = [
+            ('Data Spike', 'Used in battles'),
+            ('Crypto Token', 'Used to acquire or repair rigs.'),
+            ('Removable Drive', 'Found in rigs and used for extraction'),
+            ('Security Chip', 'Used to encrypt of decrypt assets.'),
+            ('Hardware Patch', 'Used to upgrade rigs')
+        ]
+
+        choice = random.choice(asset_list)
+        generated_asset = Asset(choice[0], choice[1])
+        self.storage.append(generated_asset)
+        print('\nGenerating asset... 0%'
+              '\nGenerating asset... 13%'
+              '\nGenerating asset... 21%'
+              '\nGenerating asset... 40%'
+              '\nGenerating asset... 78%'
+              '\nGenerating asset... 100%')
+        print(f'\n{generated_asset.name} has been generated.')
+        return generated_asset
 
     def __str__(self):
         if self.storage:
