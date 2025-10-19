@@ -164,7 +164,7 @@ class Hacker:
                     print(f'All items need to be decrypted before transfer.')
                     return
 
-            if not self.rif.storage_lvl(len(self.inventory)): # Checks for space if transferring all
+            if not self.rig.storage_lvl(len(self.inventory)): # Checks for space if transferring all
                 print(f'Not enough room for everything. ({len(self.rig.storage)}/{self.rig.storage_cap})')
                 return
             self.rig.storage.extend(self.inventory)
