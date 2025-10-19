@@ -75,9 +75,9 @@ class Rig:
             rig_inv = '\n'.join(str(asset) for asset in self.storage)
         else:
             rig_inv = 'No assets.'
-        return (f'----------\n'
+        return (f'\n----- Rig Information -----\n'
                 f'Rig Name: {self.name}\n'
                 f'Condition: {self.condition()}\n'
                 f'Upgrade Level: {self.upgrade_level}\n'
                 f'Assets: {rig_inv}\n'
-                f'---------')
+                f'---------------------------')

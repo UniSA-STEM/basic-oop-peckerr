@@ -34,7 +34,8 @@ class Hacker:
                 if rig_name is not None:
                     self.rig = Rig(rig_name)
                 else:
-                    self.rig = Rig(input('Name your rig: '))
+                    self.rig = Rig(input(f'\n{self.name} has purchased a rig!'
+                                         f'\nWhat should {self.name} name the rig? '))
                     print(f'{self.name} activated rig: {self.rig.name}.')
                 self.inventory.remove(asset)
                 return
@@ -171,7 +172,9 @@ class Hacker:
             hacker_inv = '\n'.join(str(asset) for asset in self.inventory) #Had to google this one, converts each inv obj into str, iterates on each asset
         else:
             hacker_inv = 'No assets.'
-        return (f'\nHacker: {self.name}\n'
+        return (f'\n----- Hacker Information -----\n'
+                f'Hacker: {self.name}\n'
                 f'Rig Name: {rig_name}\n'
                 f'Trace Level: {self.trace_level}\n'
-                f'Inventory: {hacker_inv}\n')
+                f'Inventory: {hacker_inv}\n'
+                f'------------------------------')
