@@ -16,6 +16,8 @@ This is my own work as defined by the University's Academic Misconduct Policy.
 
 # Import classes
 from Hacker import Hacker
+from Rig import Rig
+from Asset import Asset
 
 # def main():
 #     #hacker = Hacker(input('Enter your elite hacker name: '))
@@ -79,18 +81,30 @@ from Hacker import Hacker
 # test2()
 
 # TEST 3: Upgrade testing - consume asset and influence upgrade level
-def test3():
-    attacker = Hacker('Phil')
-    attacker.get_rig()
+# def test3():
+#     attacker = Hacker('Phil')
+#     attacker.get_rig()
+#
+#     attacker.inventory.append(Asset('Hardware Patch','- Used to upgrade rigs.')) #Gives player item
+#
+#     print('\nBefore upgrade:')
+#     print('\n'.join(str(asset) for asset in attacker.inventory))
+#     print('Upgrade Level:', attacker.rig.upgrade_level)
+#
+#     attacker.upgrade_rig()
+#
+#     print('\nAfter upgrade:')
+#     print('\n'.join(str(asset) for asset in attacker.inventory))
+#     print('Upgrade Level:', attacker.rig.upgrade_level)
+# test3()
 
-    attacker.inventory.append(Asset('Hardware Patch')) #Gives player item
+#TEST 4: Encryption and storage testing
+def test4():
+    attacker = Hacker('Hacker')
+    attacker.get_rig(rig_name= 'Hack222')
 
-    print('Before upgrade:')
-    print(attacker.rig)
+    attacker.inventory.append(Asset('Security Chip', '- Used to encrypt or decrypt assets.'))
+    attacker.inventory.append(Asset.data_spike)
 
-    attacker.upgrade_rig()
-
-    print('After upgrade:')
-    print(attacker.rig)
-test3()
-
+    print(attacker)
+test4()

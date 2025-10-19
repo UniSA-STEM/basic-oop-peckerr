@@ -25,10 +25,16 @@ class Asset:
         else:
             return f'{self.name} {self.description}'
 
+    # Assets to be used, as class attributes
+    crypto_token = None
+    data_spike = None
+    removable_drive = None
+    security_chip = None
+    hardwarep_patch = None
 
-#ASSET LIST
-# CryptoToken: Used to acquire or repair rigs. (H)
-# Data Spike: Used in battles. (R)
-# Removable Drive: Found in rigs and used for extraction. (R)
-# Security Chip: Used to encrypt or decrypt assets. (H or R)
-# Hardware Patch: Used to upgrade rigs. (H)
+# Initialise predefined values for assets
+Asset.crypto_token = Asset('CryptoToken', '- Used to acquire or repair rigs.')
+Asset.data_spike = Asset('Data Spike', '- Used in battles.')
+Asset.removable_drive = Asset('Removable Drive', '- Found in rigs and used for extraction.')
+Asset.security_chip = Asset('Security Chip', '- Used to encrypt or decrypt assets.')
+Asset.hardware_patch = Asset('Hardware Patch', '- Used to upgrade rigs.')

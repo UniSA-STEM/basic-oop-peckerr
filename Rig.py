@@ -24,7 +24,7 @@ class Rig:
             Asset('Removable Drive', 'Found in rigs and used for extraction')
         ]
 
-    def repair(self, crypto_token):
+    def repair(self):
         if self.damage_counter > 0:
             self.damage_counter = 0
             self.broken_state = False
@@ -32,7 +32,7 @@ class Rig:
         else:
             print('No repair is needed.')
 
-    def upgrade(self, hardware_patch):
+    def upgrade(self):
         self.upgrade_level += 1
         print(f'{self.name} has been upgraded to {self.upgrade_level}.')
 
@@ -54,7 +54,7 @@ class Rig:
             ('Data Spike', '- Used in battles.'),
             ('Crypto Token', '-  to acquire or repair rigs.'),
             ('Removable Drive', '- Found in rigs and used for extraction.'),
-            ('Security Chip', '- Used to encrypt of decrypt assets.'),
+            ('Security Chip', '- Used to encrypt or decrypt assets.'),
             ('Hardware Patch', '- Used to upgrade rigs.')
         ]
 
@@ -64,7 +64,7 @@ class Rig:
         print('\nGenerating asset... 0%'
               '\nGenerating asset... 13%'
               '\nGenerating asset... 21%'
-              '\nGenerating asset... 40%'
+              '\nGenerating asset... 40%'       # Fake waiting - maybe add rng clock later.
               '\nGenerating asset... 78%'
               '\nGenerating asset... 100%')
         print(f'\n{generated_asset.name} has been generated.')
