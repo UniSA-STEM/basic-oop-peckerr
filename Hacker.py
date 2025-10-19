@@ -53,7 +53,6 @@ class Hacker:
                     target.rig.damage_counter += 1
                     target.rig.broken()
                     if target.rig.broken_state:
-                        print('insert asset extraction method here')     # METHOD NOT IMPLEMENTED
                         self.reduce_trace()                                   # Potentially unwise to have that here, locked behind attacking - which is blocked if exposed
                     self.rig.storage.remove(asset)
                     return
@@ -61,16 +60,13 @@ class Hacker:
 
     def extract_asset(self, target):
         assets_extracted = 0
-        for asset in self.inventory:
-            if asset.name == 'Removable Drive' and target.broken_state:
-                for items in target.rig.storage:
-                    if not items.encrypted:
-                        self.inventory.append(items)
-                        target.storage.remove(items)
-                        assets_extracted += 1
-                print(f'Extracted {assets_extracted} asset/s.')
-                assets_extracted = 0
-        print('Extraction failed')
+        for asset in target.storage:
+            if not asset.encrypted:
+                self.inventory.append(asset)
+                target.storage.remove(asset)
+                assets_extracted += 1
+        print(f'Extracted {assets_extracted} asset/s.')
+
 
 
     def encrypt_decrypt_asset(self, item):
@@ -99,7 +95,7 @@ class Hacker:
             return
         if asset_name:
             for asset in self.inventory:
-                if asset == asset_name:
+                if asset.name == asset_name:
                     self.rig.storage.append(asset) #Clone item to Rig class storage list
                     self.inventory.remove(asset)
                     print(f'{asset_name} is now stored in the rig.')

@@ -42,6 +42,22 @@ def main():
     attacker.rig.generate_asset()
     print(attacker.rig)
 
+def extract_test():
+    attacker = Hacker('Phil')
+    defender = Hacker('Bad Phil')
+
+    print(attacker)
+
+    attacker.get_rig()
+    defender.get_rig(rig_name='Bad Phil\'s Bad Rig')
+
+    attacker.attack(defender)
+    attacker.attack(defender)
+
+    print(attacker)
+    attacker.extract_asset(defender.rig)
+    print(attacker)
 
 
-main()
+extract_test()
+#main()
