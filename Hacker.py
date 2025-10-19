@@ -77,7 +77,7 @@ class Hacker:
             return
 
         assets_extracted = 0
-        for asset in target.storage:
+        for asset in target.storage[:]:  # Slice as to not skip elements.
             if not asset.encrypted:
                 self.inventory.append(asset)
                 target.storage.remove(asset)

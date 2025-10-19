@@ -7,18 +7,10 @@ Username: COCTY007
 This is my own work as defined by the University's Academic Misconduct Policy.
 """
 
-# NEED TO DO LIST
-# Rig generate assets
-# Expand on trace level, action blocking, exposing etc
-# Rig upgrade storage size (?)
-# Rig upgrade damage and tankiness
-# rig condition logic is wrong, it needs to check both upgrade lvl and damage(wear and tear)
-
 # Import classes
 from Hacker import Hacker
 from Rig import Rig
 from Asset import Asset
-
 
 # def main():
 #     #hacker = Hacker(input('Enter your elite hacker name: '))
@@ -120,45 +112,43 @@ from Asset import Asset
 #     print(attacker.rig)
 # test4()
 
-# TEST 5: Upgrade levels, influencing damage taken
-def test5():
-    attacker = Hacker('Attacker')
-    defender = Hacker('Defender')
-
-    attacker.get_rig('Attacker Rig')
-    defender.get_rig('Defender Rig')
-
-    print(defender.rig)
-
-    attacker.attack(defender)
-    attacker.attack(defender) # Should break the rig (lvl 0 has 2 hp)
-
-    print(defender.rig) # Shows broken rig values
-
-    attacker.attack(defender)  # Will not attack as target is broken
-
-    defender.rig.repair(defender) # Cannot repair as defender has no token
-    defender.inventory.append(Asset.crypto_token)
-    defender.rig.repair(defender) # Will repair
-    defender.rig.upgrade()
-    defender.rig.upgrade() # Upgrade x2
-    print(defender.rig) # Will display rig is now repaired and is upgraded x2
-
-    attacker.rig.storage.append(Asset.data_spike)
-    attacker.rig.storage.append(Asset.data_spike)
-    attacker.rig.storage.append(Asset.data_spike)
-    attacker.rig.storage.append(Asset.data_spike)
-    attacker.rig.storage.append(Asset.data_spike)
-    attacker.inventory.append(Asset.removable_drive) # Give attacker means to break defender and extract
-
-    attacker.attack(defender)
-    attacker.attack(defender)
-    attacker.attack(defender)
-    print(attacker)
-    print(defender.rig)
-    attacker.attack(defender)
-
-    print(attacker)
-
-
-test5()
+# TEST 5: Upgrade levels, influencing damage taken, extractions
+# def test5():
+#     attacker = Hacker('Attacker')
+#     defender = Hacker('Defender')
+#
+#     attacker.get_rig('Attacker Rig')
+#     defender.get_rig('Defender Rig')
+#
+#     print(defender.rig)
+#
+#     attacker.attack(defender)
+#     attacker.attack(defender) # Should break the rig (lvl 0 has 2 hp)
+#
+#     print(defender.rig) # Shows broken rig values
+#
+#     attacker.attack(defender)  # Will not attack as target is broken
+#
+#     defender.rig.repair(defender) # Cannot repair as defender has no token
+#     defender.inventory.append(Asset.crypto_token)
+#     defender.rig.repair(defender) # Will repair
+#     defender.rig.upgrade()
+#     defender.rig.upgrade() # Upgrade x2
+#     print(defender.rig) # Will display rig is now repaired and is upgraded x2
+#
+#     attacker.rig.storage.append(Asset.data_spike)
+#     attacker.rig.storage.append(Asset.data_spike)
+#     attacker.rig.storage.append(Asset.data_spike)
+#     attacker.rig.storage.append(Asset.data_spike)
+#     attacker.rig.storage.append(Asset.data_spike)
+#     attacker.inventory.append(Asset.removable_drive) # Give attacker means to break defender and extract
+#
+#     attacker.attack(defender)
+#     attacker.attack(defender)
+#     attacker.attack(defender)
+#     print(attacker)
+#     print(defender.rig)
+#     attacker.attack(defender)
+#
+#     print(attacker)
+# test5()
