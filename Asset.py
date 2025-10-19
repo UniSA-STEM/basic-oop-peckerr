@@ -30,7 +30,7 @@ class Asset:
     data_spike = None
     removable_drive = None
     security_chip = None
-    hardwarep_patch = None
+    hardware_patch = None
 
 # Initialise predefined values for assets
 Asset.crypto_token = Asset('CryptoToken', '- Used to acquire or repair rigs.')

@@ -37,7 +37,7 @@ class Rig:
                 return
         print('Could not repair - No CryptoToken asset.')
 
-    def upgrade(self):
+    def upgrade(self, hardware_patch):
         self.upgrade_level += 1
         print(f'{self.name} has been upgraded to level: {self.upgrade_level}.')
 
@@ -57,7 +57,7 @@ class Rig:
     def generate_asset(self):
         asset_list = [
             ('Data Spike', '- Used in battles.'),
-            ('Crypto Token', '-  to acquire or repair rigs.'),
+            ('CryptoToken', '-  to acquire or repair rigs.'),
             ('Removable Drive', '- Found in rigs and used for extraction.'),
             ('Security Chip', '- Used to encrypt or decrypt assets.'),
             ('Hardware Patch', '- Used to upgrade rigs.')

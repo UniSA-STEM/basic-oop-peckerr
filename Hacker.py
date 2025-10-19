@@ -39,12 +39,19 @@ class Hacker:
                     print(f'{self.name} activated rig: {self.rig.name}.')
                 self.inventory.remove(asset)
                 return
-        print('You are broke buddy, no sweet sweet rig for you.')   # Change this to be professional :)
+        print('To acquire a rig you must have a CryptoToken')
 
     def attack(self, target):
         if self.exposed():
             print('You are exposed. Reduce trace level to attack')
             return
+        if not self.rig:
+            print(f'{self.name} does not have a rig to launch an attack from.')   # These 3 if statements ensure valid attacks via checking if exposed, or if rigs exist.
+            return
+        if not target.rig:
+            print(f'{target.name} does not have a rig to attack.')
+            return
+
         if not target.rig.broken_state:
             for asset in self.rig.storage:
                 if asset.name == 'Data Spike':
@@ -92,6 +99,10 @@ class Hacker:
                 item = asset
                 break
 
+        if not item:
+            print(f'{asset_name} not found')
+            return
+
         security_chip = None        # Validation
         for asset in self.inventory:
             if asset.name == 'Security Chip':
@@ -128,7 +139,7 @@ class Hacker:
         else:
             print('You need a Hardware Patch to upgrade your rig.')
 
-    def store_asset(self, asset_name = None):
+    def store_asset(self, asset_name=None):
         if not self.rig:                                            # Validation
             print('You need a rig to be able to store assets.')
             return
@@ -144,29 +155,31 @@ class Hacker:
                     print(f'{asset_name} is now stored in the rig.')
                     return
             print(f'No asset named {asset_name} was found in inventory.')
-        else:                                               # Transfers all items
-            if asset.encrypted:
-                print(f'All items needs to be decrypted before transfer.')
-                return
+        else:   # Transfers all items
+            for asset in self.inventory: # Checks all items
+                if asset.encrypted:
+                    print(f'All items need to be decrypted before transfer.')
+                    return
             self.rig.storage.extend(self.inventory)
             self.inventory.clear()
             print('\nAll assets are now in rig storage.')
 
-    def retrieve_asset(self, asset_name = None):
+    def retrieve_asset(self, asset_name=None):
         if not self.rig:
-            print('You need a rig to retrieve things in first choom')
+            print('You do not have a rig to retrieve assets from.')
             return
+
         if asset_name:
             for asset in self.rig.storage:
                 if asset.name == asset_name:
                     self.inventory.append(asset)
                     self.rig.storage.remove(asset)
                     print(f'{asset_name} has been retrieved from the rig.')
-            print(f'You actually need to own a {asset_name} to retrieve it bucko.')
+                    return
+            print(f'{asset_name} not found in rig storage.')
         else:
-            for asset in self.rig.storage:
-                self.inventory.append(asset)
-                self.rig.storage.remove(asset)
+            self.inventory.extend(self.rig.storage)
+            self.rig.storage.clear()
             print('\nAll assets are now in inventory.')
 
     def scan_inventory(self, asset_name):
