@@ -82,15 +82,22 @@ class Hacker:
         self.inventory.remove(removable_drive)          # Consumes removable drive asset if successful
 
     def encrypt_decrypt_asset(self, item):
+        security_chip = None
         for asset in self.inventory:
             if asset.name == 'Security Chip':
-                if item.encrypted:
-                    item.encrypted = False
-                    print(f'{item.name} has been decrypted.')
-                elif not item.encrypted:
-                    item.encrypted = True
-                    print(f'{item.name} has been encrypted.')
-                return
+                security_chip = asset
+                break
+
+        if security_chip:
+            if item.encrypted:
+                item.decrypt()
+                print(f'{item.name} decrypted.')
+            else:
+                item.encrypt()
+                print(f'{item.name} encrypted.')
+            self.inventory.remove(security_chip)
+        else:
+            print('You need a Security Chip to encrypt or decrypt assets.')
 
     def upgrade_rig(self):
         for asset in self.inventory:
@@ -137,9 +144,9 @@ class Hacker:
 
     def scan_inventory(self, asset_name):
         for asset in self.inventory:
-            if asset == asset_name:
+            if asset.name == asset_name:
                 self.inventory.remove(asset)
-                print(f'{asset_name} removed from inventory, don\'t know why you did that things aren\'t free :)')
+                print(f'{asset_name} removed from inventory.')
                 return asset # Instructions unclear, is this what was meant by 'return and remove'?
             print(f'You do not own {asset_name}')
             return None # see above comment?
