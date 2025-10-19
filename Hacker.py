@@ -100,13 +100,21 @@ class Hacker:
             print('You need a Security Chip to encrypt or decrypt assets.')
 
     def upgrade_rig(self):
+        if not self.rig:
+            print('You do not own a rig.')
+            return
+
+        hardware_patch = None
         for asset in self.inventory:
-            if asset.name == 'Hardware Patch' and self.rig:
-                rig.upgrade_level += 1
-                self.inventory.remove(asset)
-                print(f'{self.name} upgraded their rig.')
-                return
-            print('You need a \'Hardware Patch\' to upgrade your rig.')
+            if asset.name == 'Hardware Patch':
+                hardware_patch = asset          #Sets to true if hacker inventory has needed item
+                break
+
+        if hardware_patch:
+            self.rig.upgrade(hardware_patch)
+            self.inventory.remove(hardware_patch)
+        else:
+            print('You need a Hardware Patch to upgrade your rig.')
 
     def store_asset(self, asset_name = None):
         if not self.rig:                                            # Validation
