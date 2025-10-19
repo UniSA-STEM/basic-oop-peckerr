@@ -48,10 +48,10 @@ class Hacker:
         if not target.rig.broken_state:
             for asset in self.rig.storage:
                 if asset.name == 'Data Spike':
-                    print(f'\n{self.name} launched a data spike at {target.name}\'s rig {target.rig.name}.')
+                    print(f'\n{self.name} launched a data spike at {target.name}\'s rig: {target.rig.name}, dealing {1 + self.rig.upgrade_level} damage.')
                     self.trace_level += 1
-                    print(f'Trace level increased to {self.trace_level}\n')
-                    target.rig.damage_counter += 1
+                    print(f'{self.name}\'s trace level increased to {self.trace_level}\n')
+                    target.rig.damage_counter += 1 + self.rig.upgrade_level
                     target.rig.broken()
                     if target.rig.broken_state:
                         self.reduce_trace()                                   # Potentially unwise to have that here, locked behind attacking - which is blocked if exposed
@@ -60,6 +60,9 @@ class Hacker:
                             self.extract_asset(target.rig)
                     self.rig.storage.remove(asset)
                     return
+        elif target.rig.broken_state:
+            print('The target is already broken.')
+            return
         print('You need a \'Data Spike\' to launch an attack.')
 
     def extract_asset(self, target):

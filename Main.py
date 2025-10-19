@@ -99,7 +99,7 @@ from Asset import Asset
 #     print('Upgrade Level:', attacker.rig.upgrade_level)
 # test3()
 
-#TEST 4: Encryption and storage testing
+# TEST 4: Encryption and storage testing
 # def test4():
 #     attacker = Hacker('Hacker')
 #     attacker.get_rig(rig_name= 'Hack222')
@@ -119,3 +119,46 @@ from Asset import Asset
 #     print(attacker) # Nothing should change for both rig/hacker
 #     print(attacker.rig)
 # test4()
+
+# TEST 5: Upgrade levels, influencing damage taken
+def test5():
+    attacker = Hacker('Attacker')
+    defender = Hacker('Defender')
+
+    attacker.get_rig('Attacker Rig')
+    defender.get_rig('Defender Rig')
+
+    print(defender.rig)
+
+    attacker.attack(defender)
+    attacker.attack(defender) # Should break the rig (lvl 0 has 2 hp)
+
+    print(defender.rig) # Shows broken rig values
+
+    attacker.attack(defender)  # Will not attack as target is broken
+
+    defender.rig.repair(defender) # Cannot repair as defender has no token
+    defender.inventory.append(Asset.crypto_token)
+    defender.rig.repair(defender) # Will repair
+    defender.rig.upgrade()
+    defender.rig.upgrade() # Upgrade x2
+    print(defender.rig) # Will display rig is now repaired and is upgraded x2
+
+    attacker.rig.storage.append(Asset.data_spike)
+    attacker.rig.storage.append(Asset.data_spike)
+    attacker.rig.storage.append(Asset.data_spike)
+    attacker.rig.storage.append(Asset.data_spike)
+    attacker.rig.storage.append(Asset.data_spike)
+    attacker.inventory.append(Asset.removable_drive) # Give attacker means to break defender and extract
+
+    attacker.attack(defender)
+    attacker.attack(defender)
+    attacker.attack(defender)
+    print(attacker)
+    print(defender.rig)
+    attacker.attack(defender)
+
+    print(attacker)
+
+
+test5()

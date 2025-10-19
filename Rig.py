@@ -19,22 +19,27 @@ class Rig:
         self.broken_state = False
         self.upgrade_level = 0
         self.storage = [
-            Asset('Data Spike', 'Used in battles'),
-            Asset('Data Spike', 'Used in battles'),
-            Asset('Removable Drive', 'Found in rigs and used for extraction')
+            Asset('Data Spike', '- Used in battles'),
+            Asset('Data Spike', '- Used in battles'),
+            Asset('Removable Drive', '- Found in rigs and used for extraction')
         ]
 
-    def repair(self):
-        if self.damage_counter > 0:
-            self.damage_counter = 0
-            self.broken_state = False
-            print(f'{self.name} has been repaired.')
-        else:
-            print('No repair is needed.')
+    def repair(self, hacker):
+        for asset in hacker.inventory:
+            if asset.name == 'CryptoToken':
+                if self.damage_counter > 0:
+                    self.damage_counter = 0
+                    self.broken_state = False
+                    print(f'{self.name} has been repaired.')
+                    hacker.inventory.remove(asset)
+                else:
+                    print('No repair is needed.')
+                return
+        print('Could not repair - No CryptoToken asset.')
 
     def upgrade(self):
         self.upgrade_level += 1
-        print(f'{self.name} has been upgraded to {self.upgrade_level}.')
+        print(f'{self.name} has been upgraded to level: {self.upgrade_level}.')
 
     def broken(self):
         max_hp = 2 + self.upgrade_level
