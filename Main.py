@@ -12,153 +12,58 @@ from Hacker import Hacker
 from Rig import Rig
 from Asset import Asset
 
-# def main():
-#     #hacker = Hacker(input('Enter your elite hacker name: '))
-#     attacker = Hacker('Phil')
-#     defender = Hacker('Bad Phil')
-#     print(attacker)
-#
-#     attacker.get_rig()
-#     defender.get_rig(rig_name = 'Bad Phil\'s Bad Rig')
-#
-#     attacker.attack(defender)
-#     attacker.attack(defender)
-#     attacker.attack(defender)
-#
-#     print(attacker)
-#     attacker.store_asset()
-#     print(attacker.rig)
-#     print(attacker)
-#
-#     attacker.retrieve_asset('Removable Drive')
-#     print(attacker)
-#
-#     print(attacker.rig)
-#     attacker.rig.generate_asset()
-#     print(attacker.rig)
+def edge_cases():
+    print('\n--------------------------------- Welcome to my OOP Basic Programming Assignment ---------------------------------')
+    print('This function will run through various tests, focusing on edge cases and error handling as listed in assignment PDF.')
 
-# def extract_test():
-#     attacker = Hacker('Phil')
-#     defender = Hacker('Bad Phil')
-#
-#     print(attacker)
-#
-#     attacker.get_rig()
-#     defender.get_rig(rig_name='Bad Phil\'s Bad Rig')
-#
-#     attacker.attack(defender)
-#     print(attacker)
-#     attacker.attack(defender)
-#
-#
-#     #attacker.extract_asset(defender.rig)
-#     print(attacker)
+    print('\nTest 1: Initialise hacker, upgrade without a rig.')
+    hacker1 = Hacker('Joe Blogs')
+    hacker1.inventory.append(Asset.hardware_patch)  # Give hacker required item
+    print(hacker1)
+    print('\nThere will now be an error in upgrading due to no rig.\n')
+    hacker1.upgrade_rig()
+    print('Test 1 concluded.\n')
 
-#extract_test()
-#main()
+    print('\nTest 2: Encrypting without required asset.\n')
+    print('This will fail and display an error message.\n')
+    hacker1.encrypt_decrypt_asset('Hardware Patch')
+    print('Test 2 concluded.\n')
 
-# TESTING
+    print('\nTest 3: High trace handling and attacking when exposed.')
+    hacker1.get_rig('Jeff')   # I allowed the player to choose their own rig name via input, for testing you can specify name when calling the method.
+    defender1 = Hacker('Evil Joe')
+    defender1.get_rig('Evil Jeff')
+    hacker1.trace_level = 6
+    print('Joe Blogs trace level has been set above the trace threshold, any attempt to attack will now fail.\n')
+    hacker1.attack(defender1)
 
-# TEST 1: Initialise hacker and display inventory
-# def test1():
-#     attacker = Hacker('Phil')
-#     print(attacker)
-# test1() # Success
+edge_cases()
 
-# TEST 2: Get rig, display hacker and rig inventory
-# def test2():
-#     attacker = Hacker('Phil')
-#     attacker.get_rig()
-#     print(attacker)
-#     print(attacker.rig)
-# test2()
+def battle():
+    print('\n------------------------------------- Welcome to my OOP Basic Programming Assignment -------------------------------------')
+    print('This function will simulate a battle between an attacking and defending hacker/rig. You may decide to extract assets or not.\n')
 
-# TEST 3: Upgrade testing - consume asset and influence upgrade level
-# def test3():
-#     attacker = Hacker('Phil')
-#     attacker.get_rig()
-#
-#     attacker.inventory.append(Asset('Hardware Patch','- Used to upgrade rigs.')) #Gives player item
-#
-#     print('\nBefore upgrade:')
-#     print('\n'.join(str(asset) for asset in attacker.inventory))
-#     print('Upgrade Level:', attacker.rig.upgrade_level)
-#
-#     attacker.upgrade_rig()
-#
-#     print('\nAfter upgrade:')
-#     print('\n'.join(str(asset) for asset in attacker.inventory))
-#     print('Upgrade Level:', attacker.rig.upgrade_level)
-# test3()
+    print('| ------------------------------------- |')
+    print('|        Today\'s combatants:            |')
+    print('| Attacking Hacker: FiredUp             |')
+    print('| Attacking Rig:    Fire Blaster 6000   |')
+    print('| ------------------------------------- |')
+    print('| Defending Hacker: Hopeful             |')
+    print('| Defending Rig:    No Talent           |')
+    print('| ------------------------------------- |')
 
-# TEST 4: Encryption and storage testing
-# def test4():
-#     attacker = Hacker('Hacker')
-#     attacker.get_rig(rig_name= 'Hack222')
-#
-#     attacker.inventory.append(Asset.security_chip) #add items to inv for testing
-#     attacker.inventory.append(Asset.data_spike)
-#
-#     print(attacker) # Hacker should have a rig, and two items.
-#
-#     attacker.encrypt_decrypt_asset('Data Spike') #(Encrypt the data spike asset that is now in attacker inventory)
-#
-#     print(attacker) # Hacker should have a rig, and only an encrypted data spike
-#     print(attacker.rig) # Rig should only have default items
-#
-#     attacker.store_asset('Data Spike') #Attempt to store newly encrypted asset (SHOULD FAIL AND RETURN A MESSAGE)
-#
-#     print(attacker) # Nothing should change for both rig/hacker
-#     print(attacker.rig)
-# test4()
+    attacker = Hacker('FiredUp')
+    defender = Hacker('Hopeful')
+    attacker.get_rig('Fire Blaster 6000')
+    defender.get_rig('No Talent')
 
-#TEST 5: Upgrade levels, influencing damage taken, extractions
-def test5():
-    attacker = Hacker('Attacker')
-    defender = Hacker('Defender')
-
-    attacker.get_rig('Attacker Rig')
-    defender.get_rig('Defender Rig')
-
-    print(defender.rig)
-
+    print('\nTEST 1')
+    print('Si')
     attacker.attack(defender)
-    attacker.attack(defender) # Should break the rig (lvl 0 has 2 hp)
-
-    print(defender.rig) # Shows broken rig values
-
-    attacker.attack(defender)  # Will not attack as target is broken
-
-    defender.rig.repair(defender) # Cannot repair as defender has no token
-    defender.inventory.append(Asset.crypto_token)
-    defender.rig.repair(defender) # Will repair
-    defender.inventory.append(Asset.hardware_patch)
-    defender.inventory.append(Asset.hardware_patch)
-    defender.upgrade_rig()
-    defender.upgrade_rig() # Upgrade x2
-    print(defender.rig) # Will display rig is now repaired and is upgraded x2
-
-    attacker.rig.storage.append(Asset.data_spike)
-    attacker.rig.storage.append(Asset.data_spike)
-    attacker.rig.storage.append(Asset.data_spike)
-    attacker.rig.storage.append(Asset.data_spike)
-    attacker.rig.storage.append(Asset.data_spike)
-    attacker.inventory.append(Asset.removable_drive) # Give attacker means to break defender and extract
-
-    attacker.attack(defender)
-    attacker.attack(defender)
-    attacker.attack(defender)
-    print(attacker)
-    print(defender.rig)
+    defender.attack(attacker)
     attacker.attack(defender)
 
-    print(attacker)
-test5()
+    print('\nThe defending hacker is now retrieving their rig for repairs, but do they have the resources?\n')
+    defender.rig.repair(defender)
 
-# def test6():
-#     attacker = Hacker('Joe')
-#     attacker.get_rig('dawgy D')
-#     attacker.rig.generate_asset(attacker)
-#
-# test6()
-
+battle()

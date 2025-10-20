@@ -43,7 +43,8 @@ class Hacker:
 
     def attack(self, target):
         if self.exposed():
-            print('You are exposed. Reduce trace level to attack')
+            print(f'{self.name} is exposed. Reduce trace level to perform an attack.')
+            print(f'Current trace level: {self.trace_level}/5.')
             return
         if not self.rig:
             print(f'{self.name} does not have a rig to launch an attack from.')   # These 3 if statements ensure valid attacks via checking if exposed, or if rigs exist.
@@ -63,9 +64,14 @@ class Hacker:
                     self.rig.storage.remove(asset)
                     if target.rig.broken_state:
                         self.reduce_trace()
-                        extract_check = input('Do you want to extract assets? (y/n) ')
+                        extract_check = input('\nDo you want to extract assets? (y/n) ')
                         if extract_check == 'y' or extract_check == 'Y':
                             self.extract_asset(target.rig)
+                        else:
+                            print('You decided not to extract assets. How kind.')
+                            return
+                    if self.trace_level > Hacker.TRACE_THRESHOLD:
+                        print(f'{self.name} is now exposed.')
                     return
         elif target.rig.broken_state:
             print('The target is already broken.')
