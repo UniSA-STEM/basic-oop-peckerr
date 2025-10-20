@@ -7,6 +7,12 @@ Username: COCTY007
 This is my own work as defined by the University's Academic Misconduct Policy.
 """
 
+'''
+Please scroll to bottom of this file and instantiate either 'edge_cases()', 'battle()', or 'encrypt_test()' by commenting in or out as you wish.
+Feel free test more cases.
+'''
+
+
 # Import classes
 from Hacker import Hacker
 from Rig import Rig
@@ -36,8 +42,6 @@ def edge_cases():
     hacker1.trace_level = 6
     print('Joe Blogs trace level has been set above the trace threshold, any attempt to attack will now fail.\n')
     hacker1.attack(defender1)
-
-#edge_cases()
 
 def battle():
     print('\n------------------------------------- Welcome to my OOP Basic Programming Assignment -------------------------------------')
@@ -109,8 +113,6 @@ def battle():
     print(defender)
     print(defender.rig)
 
-#battle()
-
 def encrypt_test():
     hacker = Hacker('Joe Blogs')
     hacker.get_rig('Evil Jeff')
@@ -134,4 +136,7 @@ def encrypt_test():
     print(hacker)
     print(hacker.rig)
 
-encrypt_test()
+########################## TESTS HERE ################################
+#edge_cases()
+#encrypt_test()
+#battle()
