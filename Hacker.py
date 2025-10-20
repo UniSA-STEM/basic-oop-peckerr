@@ -55,11 +55,10 @@ class Hacker:
         if not target.rig.broken_state:
             for asset in self.rig.storage:
                 if asset.name == 'Data Spike':
+                    target.rig.take_hit(1 + self.rig.upgrade_level) # Allow for rig to handle changing it's own properties
                     print(f'\n{self.name} launched a data spike at {target.name}\'s rig: {target.rig.name}, dealing {1 + self.rig.upgrade_level} damage.')
                     self.trace_level += 1
                     print(f'{self.name}\'s trace level increased to {self.trace_level}\n')
-                    target.rig.damage_counter += 1 + self.rig.upgrade_level
-                    target.rig.broken()
                     self.rig.storage.remove(asset)
                     if target.rig.broken_state:
                         self.reduce_trace()

@@ -155,9 +155,9 @@ from Asset import Asset
 #     print(attacker)
 # test5()
 
-def test6():
-    attacker = Hacker('Joe')
-    attacker.get_rig('dawgy D')
-    attacker.rig.generate_asset(attacker)
-
-test6()
+# def test6():
+#     attacker = Hacker('Joe')
+#     attacker.get_rig('dawgy D')
+#     attacker.rig.generate_asset(attacker)
+#
+# test6()

@@ -24,6 +24,10 @@ class Rig:
             Asset('Data Spike', '- Used in battles'),
             Asset('Removable Drive', '- Found in rigs and used for extraction')]
 
+    def take_hit(self, damage=1):
+        self.damage_counter += damage
+        self.broken()
+
     def repair(self, hacker):
         for asset in hacker.inventory:
             if asset.name == 'CryptoToken':
