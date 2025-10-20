@@ -53,10 +53,11 @@ class Rig:
         return self.broken_state
 
     def condition(self):
+        max_hp = 2 + self.upgrade_level
         if self.broken_state:
-            return f'Broken (Level {self.upgrade_level})'
+            return f'Broken (Health {max_hp - self.damage_counter}/{max_hp})'
         else:
-            return f'Pristine (Level {self.upgrade_level})'
+            return f'Pristine (Health {max_hp - self.damage_counter}/{max_hp})'
 
     def generate_asset(self, hacker):
         asset_list = [

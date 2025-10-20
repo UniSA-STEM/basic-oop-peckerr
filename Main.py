@@ -37,7 +37,7 @@ def edge_cases():
     print('Joe Blogs trace level has been set above the trace threshold, any attempt to attack will now fail.\n')
     hacker1.attack(defender1)
 
-edge_cases()
+#edge_cases()
 
 def battle():
     print('\n------------------------------------- Welcome to my OOP Basic Programming Assignment -------------------------------------')
@@ -57,13 +57,81 @@ def battle():
     attacker.get_rig('Fire Blaster 6000')
     defender.get_rig('No Talent')
 
-    print('\nTEST 1')
-    print('Si')
+    print('\n== TEST 1 ==')
     attacker.attack(defender)
     defender.attack(attacker)
     attacker.attack(defender)
 
-    print('\nThe defending hacker is now retrieving their rig for repairs, but do they have the resources?\n')
+    print('\n== The defending hacker is now retrieving their rig for repairs, but do they have the resources? ==\n')
     defender.rig.repair(defender)
+    print('\n== Let\'s give the defender a hand (A CryptoToken). ==')
+    defender.rig.storage.append(Asset.crypto_token)
+    defender.rig.repair(defender)
+    print('\n== Oh no! We gave the asset to the rig and not the hacker, they better retrieve it to perform repairs. ==\n')
+    defender.retrieve_asset('CryptoToken')
+    defender.rig.repair(defender)
+    defender.inventory.append(Asset.hardware_patch)   # Comment this out to test upgrading without asset.
+    print('\n== It seems the defender found a Hardware Patch while retrieving their rig, they should upgrade. ==')
+    defender.upgrade_rig()
+    print(f'\n== Great job {defender.name}, you repaired and upgraded your rig: {defender.rig.name}. ==')
+    print('\n== Let\'s see how the rest of the battle plays out. ==')
 
-battle()
+    attacker.inventory.append(Asset.removable_drive)
+    attacker.inventory.append(Asset.hardware_patch)
+    attacker.rig.storage.append(Asset.data_spike)
+    attacker.rig.storage.append(Asset.data_spike)
+    attacker.rig.storage.append(Asset.data_spike)
+    attacker.rig.storage.append(Asset.data_spike)
+    attacker.rig.storage.append(Asset.data_spike)
+    attacker.rig.storage.append(Asset.data_spike)
+
+    print('== Oh no, the attacker has a brilliant vantage point and has ambushed the defender. ==')
+    defender.rig.upgrade_level = 5
+    attacker.attack(defender)
+    attacker.attack(defender)
+    attacker.attack(defender)
+    attacker.attack(defender)
+    attacker.attack(defender)
+
+    print(f'\n== {attacker.name} managed to get some good attacks off, but now they\'re exposed! ==')
+    print('== They better find a safe spot to run some diagnostics... ==')
+    attacker.rig.generate_asset(attacker)
+    attacker.upgrade_rig()
+    print('\n== That was quick! And they managed to upgrade and generate an extra asset wow! ==')
+    attacker.attack(defender)
+
+    print(f'\n== And the winner is... {attacker.name} with their rig {attacker.rig.name}! ==')
+    print('== Let\'s see what they ended up looking like')
+
+    print(attacker)
+    print(attacker.rig)
+
+    print(defender)
+    print(defender.rig)
+
+#battle()
+
+def encrypt_test():
+    hacker = Hacker('Joe Blogs')
+    hacker.get_rig('Evil Jeff')
+    hacker.inventory.append(Asset.security_chip)
+    hacker.inventory.append(Asset.security_chip)
+
+    print(hacker)
+    print(hacker.rig)
+
+    hacker.retrieve_asset('Data Spike')
+
+    print(hacker)
+    print(hacker.rig)
+
+    hacker.encrypt_decrypt_asset('Data Spike')
+    hacker.store_asset('Data Spike')
+    print(hacker)
+    hacker.encrypt_decrypt_asset('Data Spike')
+    hacker.store_asset('Data Spike')
+
+    print(hacker)
+    print(hacker.rig)
+
+encrypt_test()

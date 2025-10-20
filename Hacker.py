@@ -52,6 +52,9 @@ class Hacker:
         if not target.rig:
             print(f'{target.name} does not have a rig to attack.')
             return
+        if self.rig.broken():
+            print(f'{self.rig.name} is broken and cannot attack.')
+            return
 
         if not target.rig.broken_state:
             for asset in self.rig.storage:
